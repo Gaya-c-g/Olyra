@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة تحكم الإدارة - متجري</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #fdfcfc;
+      color: #333;
+      display: flex;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(135deg, #ffc0cb, #e0e0e0);
+      height: 100vh;
+      padding-top: 30px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    .sidebar h2 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 40px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover {
+      background-color: rgba(214,51,132,0.1);
+    }
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+    .main header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .main header h1 {
+      margin: 0;
+      color: #444;
+    }
+    .main header .logout {
+      background-color: #d63384;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .main header .logout:hover {
+      background-color: #b0256c;
+    }
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #ffc0cb;
+      color: #444;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .status {
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: white;
+    }
+    .status.pending { background-color: #f0ad4e; }
+    .status.processed { background-color: #5bc0de; }
+    .status.shipped { background-color: #5cb85c; }
+    .status.cancelled { background-color: #d9534f; }
+    /* Button for update */
+    .update-btn {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      background-color: #d63384;
+      color: white;
+      transition: background-color 0.3s;
+    }
+    .update-btn:hover {
+      background-color: #b0256c;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>لوحة التحكم</h2>
+    <a href="orders.html">إدارة الطلبات</a>
+    <a href="add_product.html">إضافة منتج</a>
+    <a href="settings.html">إعدادات الحساب</a>
+    <a href="#" class="logout">تسجيل خروج</a>
+  </aside>
+  <section class="main">
+    <header>
+      <h1>إدارة الطلبات</h1>
+    </header>
+    <table>
+      <thead>
+        <tr>
+          <th>رقم الطلب</th>
+          <th>الزبون</th>
+          <th>المنتجات</th>
+          <th>الإجمالي</th>
+          <th>التاريخ</th>
+          <th>الحالة</th>
+          <th>تحديث الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- بيانات افتراضية -->
+        <tr>
+          <td>#1001</td>
+          <td>أمل محمد</td>
+          <td>منتج 1، منتج 3</td>
+          <td>70 دينار</td>
+          <td>2025-04-28</td>
+          <td><span class="status pending">قيد الانتظار</span></td>
+          <td>
+            <select>
+              <option value="pending">قيد الانتظار</option>
+              <option value="processed">تم المعالجة</option>
+              <option value="shipped">شحن</option>
+              <option value="cancelled">ملغى</option>
+            </select>
+            <button class="update-btn">تحديث</button>
+          </td>
+        </tr>
+        <!-- المزيد من الصفوف هنا -->
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>

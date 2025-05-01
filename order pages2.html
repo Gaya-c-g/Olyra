@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلبات العملاء - متجري</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: 'Cairo', sans-serif; background-color: #fdfcfc; color: #333; }
+    header { background: linear-gradient(45deg, #ffc0cb, #e0e0e0); padding: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    header h1 { margin: 0; color: #444; }
+    nav { display: flex; justify-content: center; gap: 30px; margin-top: 10px; }
+    nav a { text-decoration: none; color: #555; font-weight: bold; transition: color 0.3s; }
+    nav a:hover { color: #d63384; }
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 12px 15px; border: 1px solid #ddd; text-align: center; }
+    th { background-color: #ffc0cb; color: #444; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+    .status { padding: 5px 10px; border-radius: 12px; font-size: 14px; color: white; }
+    .status.pending { background-color: #f0ad4e; }
+    .status.processed { background-color: #5bc0de; }
+    .status.shipped { background-color: #5cb85c; }
+    .status.cancelled { background-color: #d9534f; }
+    .update-btn { padding: 5px 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; background-color: #d63384; color: white; transition: background-color 0.3s; }
+    .update-btn:hover { background-color: #b0256c; }
+    select { padding: 5px 8px; border-radius: 6px; border: 1px solid #ccc; }
+    footer { background-color: #f1f1f1; text-align: center; padding: 20px; margin-top: 40px; font-size: 14px; color: #666; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>صفحة إدارة الطلبات</h1>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="orders.html">الطلبات</a>
+      <a href="products.html">المنتجات</a>
+      <a href="logout.html">تسجيل خروج</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>رقم الطلب</th>
+          <th>اسم الزبون</th>
+          <th>المنتجات</th>
+          <th>الإجمالي (دينار)</th>
+          <th>التاريخ</th>
+          <th>الحالة</th>
+          <th>تحديث الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-order-id="1001">
+          <td>#1001</td>
+          <td>أمل محمد</td>
+          <td>منتج 1، منتج 3</td>
+          <td>70</td>
+          <td>2025-04-28</td>
+          <td><span class="status pending">قيد الانتظار</span></td>
+          <td>
+            <select>
+              <option value="pending">قيد الانتظار</option>
+              <option value="processed">تم المعالجة</option>
+              <option value="shipped">شحن</option>
+              <option value="cancelled">ملغى</option>
+            </select>
+            <button class="update-btn">تحديث</button>
+          </td>
+        </tr>
+        <tr data-order-id="1002">
+          <td>#1002</td>
+          <td>خالد علي</td>
+          <td>منتج 2</td>
+          <td>50</td>
+          <td>2025-04-29</td>
+          <td><span class="status processed">تم المعالجة</span></td>
+          <td>
+            <select>
+              <option value="pending">قيد الانتظار</option>
+              <option value="processed" selected>تم المعالجة</option>
+              <option value="shipped">شحن</option>
+              <option value="cancelled">ملغى</option>
+            </select>
+            <button class="update-btn">تحديث</button>
+          </td>
+        </tr>
+        <tr data-order-id="1003">
+          <td>#1003</td>
+          <td>سارة يوسف</td>
+          <td>منتج 1</td>
+          <td>30</td>
+          <td>2025-04-30</td>
+          <td><span class="status shipped">شحن</span></td>
+          <td>
+            <select>
+              <option value="pending">قيد الانتظار</option>
+              <option value="processed">تم المعالجة</option>
+              <option value="shipped" selected>شحن</option>
+              <option value="cancelled">ملغى</option>
+            </select>
+            <button class="update-btn">تحديث</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>© 2025 متجري. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.update-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const row = button.closest('tr');
+        const orderId = row.dataset.orderId;
+        const select = row.querySelector('select');
+        const newStatus = select.value;
+        fetch(`/api/orders/${orderId}/status`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        })
+        .then(response => {
+          if (!response.ok) throw new Error('خطأ في الشبكة');
+          return response.json();
+        })
+        .then(data => {
+          const statusSpan = row.querySelector('.status');
+          statusSpan.textContent = data.statusLabel;
+          statusSpan.className = 'status ' + data.status;
+          alert('تم تحديث حالة الطلب بنجاح');
+        })
+        .catch(error => {
+          console.error(error);
+          alert('حدث خطأ أثناء التحديث');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

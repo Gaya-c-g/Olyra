@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب - متجري</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #ffc0cb, #e0e0e0);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .signup-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    .signup-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #d63384;
+    }
+    .signup-box label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    .signup-box input[type="text"],
+    .signup-box input[type="email"],
+    .signup-box input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .signup-box button {
+      width: 100%;
+      background-color: #d63384;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .signup-box button:hover {
+      background-color: #b0256c;
+    }
+    .signup-box .footer-link {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .signup-box .footer-link a {
+      color: #555;
+      text-decoration: none;
+    }
+    .signup-box .footer-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <h2>إنشاء حساب جديد</h2>
+    <form>
+      <label for="username">اسم المستخدم</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="confirm-password">تأكيد كلمة المرور</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
+
+      <button type="submit">إنشاء الحساب</button>
+    </form>
+    <div class="footer-link">
+      <p>لديك حساب بالفعل؟ <a href="#">سجل الدخول</a></p>
+    </div>
+  </div>
+</body>
+</html>

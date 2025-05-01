@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>سلة المشتريات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #fdfcfc;
+      padding: 30px;
+    }
+    h1 {
+      color: #d63384;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    .total {
+      text-align: left;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .clear-cart {
+      background-color: #b0256c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>سلة المشتريات</h1>
+  <table id="cart-table">
+    <thead>
+      <tr>
+        <th>المنتج</th>
+        <th>السعر</th>
+        <th>الكمية</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="total" id="total"></div>
+  <button class="clear-cart" onclick="clearCart()">إفراغ السلة</button>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const tbody = document.querySelector("#cart-table tbody");
+    let total = 0;
+
+    if (cart.length === 0) {
+      tbody.innerHTML = "<tr><td colspan='3'>سلتك فارغة</td></tr>";
+    } else {
+      cart.forEach(item => {
+        const row = document.createElement("
+<button class="btn-clear" onclick="placeOrder()">إتمام الشراء</button>
+<div class="total" id="total-price"></div>
+<button class="btn-clear" onclick="clearCart()">إفراغ السلة</button>
+<button class="btn-clear" onclick="placeOrder()">إتمام الشراء</button>
+<br/>
+<a class="back-link" href="index.html">← عودة للرئيسية</a>
